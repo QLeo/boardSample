@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- Mysql과 연결을 담당하는 설정-->
+  <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+    <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/Test_DataBase?characterEncoding=UTF-8&amp;allowMultiQueries=true"/>
+    <property name="username" value="root"/>
+    <property name="password" value="1q2w3e4r"/>
+  </bean>
+
+  <!-- Connection을 생성하고 처리 -->
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <!-- 도메인 명 대신 별칭으로 사용할 수 있도록 하는 설정-->
+    <property name="configLocation" value="classpath:/mybatis/mybatisConfig.xml"/>
+    <!-- mybatis-spring에서 XML Mapper로 인식시키기 위해 해당 경로를 property에 추가 -->
+    <property name="mapperLocations" value="classpath:/mybatis/mapper/*.xml"/>
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <!--
+    SqlSessionTemplate은 mybatis-spring 라이브러리에서 제공하는 클래스로 DB와 연결을 맺고 작업을 완료한 후에
+    close()처리를 대신해 주는 라이브러리
+  -->
+  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg index="0" ref="sqlSessionFactory" />
+  </bean>
+
+  <!-- 트랜잭션 -->
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+</beans>

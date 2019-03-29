@@ -1,0 +1,45 @@
+table {
+  margin-top: 3%;
+}
+
+th {
+  text-align: center;
+}
+
+th.col-1.number{
+  margin-left: 3%;
+}
+
+td {
+  text-align: center;
+}
+
+td.col-1.number{
+  margin-left: 3%;
+}
+
+div.float-right.btn-group.write-config {
+  margin-right: 3%;
+}
+
+.btn-group.write-config button{
+  width: 130px;
+  margin-right: 1%;
+}
+
+.form1 {
+  margin-top: 3%;
+}
+
+.form-group {
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.submit-btn {
+  margin-right: 3%;
+}
+
+.l-List {
+  margin-left: 3%;
+}
